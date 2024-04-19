@@ -27,18 +27,18 @@ public class CreateLoginApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		AppUser user = new AppUser(
-				"John Doe",            // name
-				"johndoe123",          // username
-				"johndoe@example.com", // email
-				"password123",         // password
-				AppUserRole.USER      // enabled
+				"John Doe",
+				"johndoe123",
+				"johndoe@example.com",
+				"password123",
+				AppUserRole.USER
 		);
 		AppUser user2 = new AppUser(
-				"Rob",            // name
-				"vetere",          // username
-				"rob@example.com", // email
-				"password123",         // password
-				AppUserRole.USER      // appUserRole// enabled
+				"Roberto",
+				"Vetere",
+				"roberto.vetere@gmail.com",
+				"1234",
+				AppUserRole.ADMIN
 		);
 		appUserService.createAppUser(user);
 		appUserService.createAppUser(user2);
