@@ -3,6 +3,7 @@ package com.holidevs.createlogin;
 import com.holidevs.createlogin.AppUser.AppUser;
 import com.holidevs.createlogin.AppUser.AppUserRepository;
 import com.holidevs.createlogin.AppUser.AppUserRole;
+import com.holidevs.createlogin.AppUser.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +17,9 @@ public class CreateLoginApplication implements CommandLineRunner {
 	@Autowired
 	AppUserRepository appUserRepository;
 
+	@Autowired
+	AppUserService appUserService;
+
 	public static void main(String[] args) {
 		SpringApplication.run(CreateLoginApplication.class, args);
 	}
@@ -27,21 +31,17 @@ public class CreateLoginApplication implements CommandLineRunner {
 				"johndoe123",          // username
 				"johndoe@example.com", // email
 				"password123",         // password
-				AppUserRole.USER,      // appUserRole
-				false,                 // locked
-				true                   // enabled
+				AppUserRole.USER      // enabled
 		);
 		AppUser user2 = new AppUser(
 				"Rob",            // name
 				"vetere",          // username
 				"rob@example.com", // email
 				"password123",         // password
-				AppUserRole.USER,      // appUserRole
-				false,                 // locked
-				true                   // enabled
+				AppUserRole.USER      // appUserRole// enabled
 		);
-		appUserRepository.save(user);
-		appUserRepository.save(user2);
+		appUserService.createAppUser(user);
+		appUserService.createAppUser(user2);
 		Optional<AppUser> optionalUser = appUserRepository.findByEmail(user.getEmail());
 		Optional<AppUser> optionalUser2 = appUserRepository.findByEmail(user2.getEmail());
 		if (optionalUser.isPresent()) {
