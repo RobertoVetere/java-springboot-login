@@ -44,7 +44,7 @@ public class AppUserService{
     public AppUser createAppUser(AppUser user) {
         // Verificar si alguno de los campos está vacío
         if (user.getName() == null || user.getUsername() == null || user.getEmail() == null || user.getPassword() == null || user.getAppUserRole() == null) {
-            throw new IllegalArgumentException("Todos los campos son obligatorios");
+            throw new IllegalArgumentException("Todos los campos son obligatorios" + user.getName() + user.getUsername() + user.getEmail() + user.getPassword() + user.getAppUserRole());
         }
 
         // Verificar si el correo electrónico ya está en uso

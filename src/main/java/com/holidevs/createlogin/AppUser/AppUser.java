@@ -1,5 +1,6 @@
 package com.holidevs.createlogin.AppUser;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,6 +33,7 @@ public class AppUser{
     private String username;
     private String email;
     private String password;
+    @Nullable
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
 
