@@ -20,6 +20,27 @@ public class AppUserService{
         return appUserRepository.findByEmail(email);
     }
 
+    public Optional<AppUser> loginUser(AppUser user) throws UsernameNotFoundException {
+        try {
+            // Busca al usuario en la base de datos por su email
+            Optional<AppUser> optionalUser = appUserRepository.findByEmail(user.getEmail());
+
+            if (optionalUser.isPresent()) {
+                AppUser foundUser = optionalUser.get();
+                if (passwordEncoder.matches(user.getPassword(), foundUser.getPassword())) {
+                    return Optional.of(foundUser);
+                } else {
+                    throw new UsernameNotFoundException("La contraseña es incorrecta");
+                }
+            } else {
+                throw new UsernameNotFoundException("El usuario no existe");
+            }
+        } catch (Exception e) {
+            throw new UsernameNotFoundException("Ocurrió un error al intentar iniciar sesión");
+        }
+    }
+
+
     public AppUser createAppUser(AppUser user) {
         // Verificar si alguno de los campos está vacío
         if (user.getName() == null || user.getUsername() == null || user.getEmail() == null || user.getPassword() == null || user.getAppUserRole() == null) {
